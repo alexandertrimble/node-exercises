@@ -7,7 +7,7 @@ export const play = async () => {
 
   const target = Math.floor(Math.random() * 10) + 1;
   console.log("Guess a number between 1 and 10");
-  let currentGuess = 0;
+  let currentGuessCount = 0;
 
   while (!gameOver) {
     const guess = await new Promise((resolve, reject) => {
@@ -16,10 +16,13 @@ export const play = async () => {
         output: process.stdout,
       });
 
-      rl.question(`Guess (${currentGuess + 1}/${maxGuesses}): `, (answer) => {
-        rl.close();
-        resolve(answer);
-      });
+      rl.question(
+        `Guess (${currentGuessCount + 1}/${maxGuesses}): `,
+        (answer) => {
+          rl.close();
+          resolve(answer);
+        }
+      );
     });
 
     if (guess === target.toString()) {
@@ -27,10 +30,10 @@ export const play = async () => {
       gameOver = true;
     } else {
       console.log(`Nope, try again.`);
-      currentGuess++;
+      currentGuessCount++;
     }
 
-    if (currentGuess >= maxGuesses) {
+    if (currentGuessCount >= maxGuesses) {
       console.log("You lose! The number was " + target + ".");
       gameOver = true;
     }

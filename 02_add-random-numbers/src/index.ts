@@ -1,6 +1,6 @@
 const REQUEST_URL =
   "https://www.random.org/integers/?num=1&min=1&max=99999&col=1&base=10&format=plain&rnd=new";
-const NUM_REQUESTS = 2;
+const NUM_REQUESTS = 30;
 
 const get_and_sum_numbers = async () => {
   //queue up all the requests
